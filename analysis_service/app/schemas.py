@@ -8,5 +8,5 @@ class AnalysisResult(BaseModel):
     words: int
     characters: int
     created_at: datetime
-
+    wordcloud_url: str | None
     model_config = ConfigDict(from_attributes=True)

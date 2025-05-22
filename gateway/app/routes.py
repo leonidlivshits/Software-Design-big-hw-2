@@ -61,3 +61,19 @@ async def proxy_analyze(file_id: str, request: Request, payload: dict = Depends(
     else:
         resp = await async_client.post(url, headers=headers)
     return Response(content=resp.content, status_code=resp.status_code, headers=resp.headers)
+
+@router.get("/analyze/{file_id}/wordcloud", summary="Download wordcloud image")
+async def proxy_wordcloud(
+    file_id: int,
+    token: dict = Depends(verify_token)
+):
+    url = f"{ANALYSIS_SERVICE_URL}/analyze/{file_id}/wordcloud"
+    headers = {"Authorization": f"Bearer {token['sub']}"}
+
+    resp = await async_client.get(url, headers=headers)
+    return Response(
+        content=resp.content,
+        status_code=resp.status_code,
+        headers=resp.headers,
+        media_type=resp.headers.get("content-type", "application/octet-stream")
+    )

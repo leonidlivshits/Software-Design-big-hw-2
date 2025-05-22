@@ -21,5 +21,24 @@ class Settings(BaseSettings):
     MAX_FILE_SIZE: int = int(os.getenv("MAX_FILE_SIZE", 5 * 1024 * 1024))
     ALLOWED_EXTENSIONS: set[str] = {".txt"}
 
+    QUICKCHART_WORDCLOUD_URL: str = "https://quickchart.io/wordcloud"
+    
+    DEFAULT_WORDCLOUD_OPTIONS: dict = {
+        "format": "png",
+        "width": 600,
+        "height": 600,
+        "backgroundColor": "transparent",
+        "fontScale": 25,
+        "scale": "linear",
+        "padding": 1,
+        "rotation": 20,
+        "maxNumWords": 200,
+        "minWordLength": 1,
+        "case": "lower",
+        "removeStopwords": False,
+        "cleanWords": True,
+        "language": "en",
+    }
+
 
 settings = Settings()
